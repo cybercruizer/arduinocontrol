@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('sensors', function (Blueprint $table) {
+        Schema::create('sensors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('device_id')->constrained('devices')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('device_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('sensor_name');
             $table->string('sensor_status');
-            $table->string('sensor_data');
-            $table->timestamp();
+            $table->string('sensor_value');
+            $table->timestamps();
         });
     }
 
@@ -28,7 +28,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('sensors', function (Blueprint $table) {
-            //
+            $table->dropForeign('sensors_device_id_foreign');
+            $table->dropForeign('sensors_user_id_foreign');
+            Schema::dropIfExists('sensors');
         });
     }
 };
