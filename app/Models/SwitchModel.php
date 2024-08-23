@@ -11,11 +11,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class SwitchModel extends Model
 {
     use HasFactory;
+    protected $table='switches';
     protected $fillable=[
         'user_id',
         'device_id',
         'switch_name',
-        'switch_status'
+        'switch_status',
+        'category'
     ];
     /**
      * Get the user that owns the SwitchModel

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('switch_name');
             $table->boolean('switch_status')->default(0);
+            $table->string('category');
             $table->timestamps();
         });
     }
